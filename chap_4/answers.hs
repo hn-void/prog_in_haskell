@@ -38,12 +38,23 @@ b || c | b == c = b
 -}
 
 -- 4.5
+{-
 (&&) :: Bool -> Bool -> Bool
 a && b = if a then
               if b then True
                    else False
               else False
+-}
 {-
 *Main> True Main.&& True
 True
 -}
+
+-- 4.6
+(&&) :: Bool -> Bool -> Bool
+a && b = if a then b
+              else False
+
+-- 4.7
+mult :: Int -> (Int -> (Int -> Int))
+mult = \x -> (\y -> (\z -> x * y * z))
