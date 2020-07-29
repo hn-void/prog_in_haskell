@@ -58,3 +58,21 @@ a && b = if a then b
 -- 4.7
 mult :: Int -> (Int -> (Int -> Int))
 mult = \x -> (\y -> (\z -> x * y * z))
+
+-- 4.8
+luhnDouble :: Int -> Int
+luhnDouble x = if double > 9 then double - 9 else double
+    where double = x * 2
+
+evenDoubleFromLeft :: (Num a) => [a] -> [a]
+evenDoubleFromLeft [] = []
+evenDoubleFromLeft (x:xs) = if even (length (x:xs))
+                             then x : evenDoubleFromLeft xs
+                             else x*2 : evenDoubleFromLeft xs
+
+evenDoubleFromRight :: (Num a) => [a] -> [a]
+evenDoubleFromRight = reverse . evenDoubleFromLeft . reverse
+
+luhn :: Int -> Int -> Int -> Int -> Bool
+luhn a b c d = if sum (map luhnDouble (evenDoubleFromRight [a,b,c,d])) `mod` 10 == 0
+                  then True else False
