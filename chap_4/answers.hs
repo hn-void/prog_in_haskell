@@ -59,7 +59,7 @@ a && b = if a then b
 mult :: Int -> (Int -> (Int -> Int))
 mult = \x -> (\y -> (\z -> x * y * z))
 
--- 4.8
+-- 4.8 I guess it's not the expected solution
 luhnDouble :: Int -> Int
 luhnDouble x = if double > 9 then double - 9 else double
     where double = x * 2
