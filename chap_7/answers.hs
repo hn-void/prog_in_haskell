@@ -111,3 +111,17 @@ CallStack (from HasCallStack):
 *Main> errorTransmit "higher-functions are difficult"
 "\180\180\&3\180\&2\185\SYN\179:\183\&1\186\180\&7\183\&9\144\&0\185\&2\DLE\178\&43\179\180\177:6:"
 -}
+
+-- 7.9
+altMap :: (a -> b) -> (a -> b) -> [a] -> [b]
+altMap f1 f2 [] = []
+altMap f1 f2 [x] = [f1 x]
+altMap f1 f2 xs = (f1 (xs !! 0)) : (f2 (xs !! 1)) : (altMap f1 f2 (drop 2 xs))
+
+-- 7.10
+luhnDouble :: Int -> Int
+luhnDouble x = if double > 9 then double - 9 else double
+    where double = x * 2
+
+luhn :: [Int] -> Bool
+luhn xs = if sum (altMap id luhnDouble (reverse xs)) `mod` 10 == 0 then True else False
